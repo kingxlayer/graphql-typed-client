@@ -91,6 +91,7 @@ export const createClient = <QR extends Fields, QC, Q, MR extends Fields, MC, M,
   }
 
   const mapResponse = (path: string[], defaultValue: any) => (response: ExecutionResult) => {
+    if (!response) throw new ClientError('There is no response data')
     if (response.errors) throw new ClientError(`Response contains errors`, response.errors)
     if (!response.data) throw new ClientError('Response data is empty')
 
